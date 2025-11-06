@@ -31,23 +31,42 @@ function initialize(){
     loadMap();
 };
 
-function loadMap(){
-	//now reassign the map variable by actually making it a useful object, this will load your leaflet map
-	myMap = L.map('mapdiv', {
-		center: [46.58, -78.19]
-		,zoom: 5
-		,maxZoom: 18
-		,minZoom: 3
-		,layers: CartoDB_Positron
-	});
+function loadMap(mapid) {
 
-	//declare basemap selector widget
-	let lcontrol = L.control.layers(baseLayers);
-	//add the widget to the map
-	lcontrol.addTo(myMap);
+	try {
+		myMap.remove();
+	} catch (e) {
+		console.log("no map to delete");
+	} finally {
 
-	fetchData("https://raw.githubusercontent.com/brubcam/GEOG-464_Lab-7/main/DATA/train-stations.geojson");
-};
+		if (mapid === "mapa") {
+			myMap = L.map('mapdiv', {
+				center: [46.58, -78.19],
+				zoom: 5,
+				maxZoom: 18,
+				minZoom: 3,
+				layers: CartoDB_Positron
+			});
+			L.control.layers(baseLayers).addTo(myMap);
+			fetchData("https://raw.githubusercontent.com/brubcam/GEOG-464_Lab-7/main/DATA/train-stations.geojson");
+		}
+
+		if (mapid === "mapb") {
+			myMap = L.map('mapdiv', {
+				center: [20, 0],
+				zoom: 2,
+				maxZoom: 18,
+				minZoom: 2,
+				layers: CartoDB_Positron
+			});
+			L.control.layers(baseLayers).addTo(myMap);
+			fetchData("https://raw.githubusercontent.com/brubcam/GEOG-464_Lab-7/main/DATA/megacities.geojson");
+		}
+
+	}
+}
+
+
 
 function fetchData(url) {
 	//load the data
@@ -66,7 +85,7 @@ function generateCircles(feature, latlng) {
 }
 
 function styleAll(feature) {
-	console.log(feature.properties.stat_ID);
+	// console.log(feature.properties.stat_ID);
 	let styles = {
 		stroke: true,
 		color: '#000',
@@ -83,14 +102,16 @@ function styleAll(feature) {
 }
 
 function addPopups(feature, layer){
-	console.log(feature);
-	console.log(layer);
-	console.log(layer._radius)
-	console.log(layer.options.fill)
-	console.log(layer.getLatLng())
+	// console.log(feature);
+	// console.log(layer);
+	// console.log(layer._radius)
+	// console.log(layer.options.fill)
+	// console.log(layer.getLatLng())
 	// layer.options.fill = false
 	// layer._radius = 80
+	layer.bindPopup(feature.properties.stat_name);
+
 }
 
 
-window.onload = initialize();
+// window.onload = initialize();
