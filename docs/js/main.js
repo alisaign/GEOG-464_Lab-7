@@ -66,6 +66,7 @@ function generateCircles(feature, latlng) {
 }
 
 function styleAll(feature) {
+	console.log(feature.properties.stat_ID);
 	let styles = {
 		dashArray: null,
 		dashOffset: null,
@@ -79,6 +80,9 @@ function styleAll(feature) {
 		fillOpacity: 0.5,
 		radius: 9
 	};
+	if (feature.properties.postal_code && feature.properties.postal_code !== "") {
+		styles.fillColor = "cyan";
+	}
 	return styles;
 }
 
