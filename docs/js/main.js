@@ -57,7 +57,7 @@ function fetchData(url) {
 		})
 		.then(function (json) {
 			//create a Leaflet GeoJSON layer using the fetched json and add it to the map object
-			L.geoJson(json, { style: styleAll, pointToLayer: generateCircles, onEachFeature:addPopups }).addTo(myMap);
+			L.geoJson(json, { style: styleAll, pointToLayer: generateCircles, onEachFeature: addPopups }).addTo(myMap);
 		})
 };
 
@@ -68,11 +68,7 @@ function generateCircles(feature, latlng) {
 function styleAll(feature) {
 	console.log(feature.properties.stat_ID);
 	let styles = {
-		dashArray: null,
-		dashOffset: null,
-		lineJoin: null,
-		lineCap: null,
-		stroke: false,
+		stroke: true,
 		color: '#000',
 		opacity: 1,
 		weight: 1,
@@ -87,9 +83,13 @@ function styleAll(feature) {
 }
 
 function addPopups(feature, layer){
+	console.log(feature);
+	console.log(layer);
 	console.log(layer._radius)
 	console.log(layer.options.fill)
 	console.log(layer.getLatLng())
+	// layer.options.fill = false
+	// layer._radius = 80
 }
 
 
