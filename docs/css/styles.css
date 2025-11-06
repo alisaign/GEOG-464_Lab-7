@@ -3,7 +3,7 @@ body {
 }
 
 #div1 {
-    height: 500px;
+    height: 250px;
 	width: 80%;
 	padding: 10px;
     margin: 0 auto;
@@ -17,4 +17,23 @@ body {
 	height: 500px;
 	width: 80%;
 	margin: 0 auto;
+}
+
+#div2 {
+	text-align: center;
+}
+
+#mapdropdown {
+	padding: 7px 14px;
+	background-color: greenyellow;
+	border: 1px solid #000;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 14px;
+	font-family: sans-serif;
+	transition: 0.2s;
+}
+
+#switchMapBtn:hover {
+	background-color: #dcdcdc;
 }

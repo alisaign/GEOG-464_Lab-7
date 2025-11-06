@@ -57,7 +57,7 @@ function loadMap(mapid) {
 				zoom: 2,
 				maxZoom: 18,
 				minZoom: 2,
-				layers: CartoDB_Positron
+				layers: Stadia_Watercolor
 			});
 			L.control.layers(baseLayers).addTo(myMap);
 			fetchData("https://raw.githubusercontent.com/brubcam/GEOG-464_Lab-7/main/DATA/megacities.geojson");
@@ -90,7 +90,7 @@ function styleAll(feature) {
 		stroke: true,
 		color: '#000',
 		opacity: 1,
-		weight: 1,
+		weight: 2,
 		fillColor: '#fff',
 		fillOpacity: 0.5,
 		radius: 9
@@ -109,9 +109,17 @@ function addPopups(feature, layer){
 	// console.log(layer.getLatLng())
 	// layer.options.fill = false
 	// layer._radius = 80
+	if (feature.properties.stat_name){
 	layer.bindPopup(feature.properties.stat_name);
+	}
+	if (feature.properties.City){
+	layer.bindTooltip(feature.properties.City, { permanent: true, direction: "right" });
+	}
 
 }
 
+document.getElementById("mapdropdown").addEventListener("change", function () {
+	loadMap(this.value);
+});
 
 // window.onload = initialize();
